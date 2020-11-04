@@ -215,6 +215,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Hooks.cpp" />
+    <ClCompile Include="src\SkillBookManager.cpp" />
     <ClCompile Include="src\SkillBookUtil.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Papyrus.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="src\BookHandler.h" />
     <ClInclude Include="src\Hooks.h" />
     <ClInclude Include="src\Offsets.h" />
+    <ClInclude Include="src\SkillBookManager.h" />
     <ClInclude Include="src\SkillBookUtil.h" />
     <ClInclude Include="src\Papyrus.h" />
     <ClInclude Include="src\PCH.h" />

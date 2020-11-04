@@ -11,6 +11,8 @@ public:
 
 	void Initialize()
 	{
+		SkillBooks.clear();
+
 		auto dataHandler = RE::TESDataHandler::GetSingleton();
 		auto books = dataHandler->GetFormArray<RE::TESObjectBOOK>();
 

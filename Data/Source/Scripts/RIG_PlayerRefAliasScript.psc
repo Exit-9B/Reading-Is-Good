@@ -1,9 +1,14 @@
 Scriptname RIG_PlayerRefAliasScript extends ReferenceAlias
 
 FormList[] Property RIG_ReadBookLists  Auto
-Perk[] Property RIG_Perks  Auto
+Perk Property RIG_LearningPerk  Auto
+Perk Property RIG_BlackBookPerk  Auto
 GlobalVariable Property RIG_BonusPerBook  Auto
-GlobalVariable Property RIG_HardCap  Auto
+GlobalVariable Property RIG_MaxBooks  Auto
+GlobalVariable Property RIG_ShowNotification  Auto
+GlobalVariable Property RIG_PlaySound  Auto
+Message Property RIG_InsightGainedMessage  Auto
+string Property SoundID  Auto
 
 Event OnInit()
 	AddPerks()
@@ -21,15 +26,24 @@ EndEvent
 
 Event OnSkillBookRead(Book akSkillBook, int aiSkill)
 	ReadSkillBook(akSkillBook, aiSkill)
+
+	if (RIG_ShowNotification.GetValueInt())
+		string sSound = ""
+		if (RIG_PlaySound.GetValueInt())
+			sSound = SoundID
+		endif
+
+		RIG_SkillBookUtil.Notification(\
+				RIG_InsightGainedMessage, \
+				aiSkill, \
+				sSound)
+	endif
 EndEvent
 
 Function AddPerks()
 	Actor kPlayerRef = GetActorReference()
-	int iIndex = 0
-	while iIndex < RIG_Perks.Length
-		kPlayerRef.AddPerk(RIG_Perks[iIndex])
-		iIndex += 1
-	endwhile
+	kPlayerRef.AddPerk(RIG_LearningPerk)
+	kPlayerRef.AddPerk(RIG_BlackBookPerk)
 EndFunction
 
 Function ReadSkillBook(Book akSkillBook, int aiSkill)
@@ -61,15 +75,15 @@ Function RefreshPerk(int aiSkillIndex)
 
 	int iReadCount = kReadBookList.GetSize()
 	float fLevelBonus = GetSkillBonus(iReadCount)
-	RIG_Perks[aiSkillIndex].SetNthEntryValue(0, 0, 1.0 + fLevelBonus)
-	RIG_Perks[aiSkillIndex].SetNthEntryValue(1, 0, 1.0 + 2.0 * fLevelBonus)
+	RIG_LearningPerk.SetNthEntryValue(aiSkillIndex, 0, 1.0 + fLevelBonus)
+	RIG_BlackBookPerk.SetNthEntryValue(aiSkillIndex, 0, 1.0 + 2.0 * fLevelBonus)
 EndFunction
 
 float Function GetSkillBonus(int aiReadCount)
 {Compute the XP bonus from the number of books read.}
-	float fHardCap = RIG_HardCap.GetValue()
-	if (fHardCap >= 0 && aiReadCount >= fHardCap)
-		return fHardCap * RIG_BonusPerBook.GetValue()
+	float fMaxBooks = RIG_MaxBooks.GetValue()
+	if (fMaxBooks >= 0 && aiReadCount >= fMaxBooks)
+		return fMaxBooks * RIG_BonusPerBook.GetValue()
 	endif
 
 	return aiReadCount * RIG_BonusPerBook.GetValue()

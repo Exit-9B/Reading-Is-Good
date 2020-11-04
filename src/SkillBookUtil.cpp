@@ -1,11 +1,17 @@
 #include "SkillBookUtil.h"
 #include "Registration.h"
+#include "SkillBookManager.h"
 #include "BookHandler.h"
-#include "Offsets.h"
+
+#define str(a) #a ## sv
+#define REGISTER(vm, script_name, fn_name) \
+vm->RegisterFunction(str(fn_name), script_name, fn_name, true)
 
 namespace SkillBookUtil
 {
-	void RegisterForOnSkillBookReadEvent(VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*, const RE::BGSRefAlias* a_alias)
+	void RegisterForOnSkillBookReadEvent(
+		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
+		const RE::BGSRefAlias* a_alias)
 	{
 		if (!a_alias)
 		{
@@ -17,7 +23,9 @@ namespace SkillBookUtil
 		regs->Register(a_alias);
 	}
 
-	void UnregisterForOnSkillBookReadEvent(VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*, const RE::BGSRefAlias* a_alias)
+	void UnregisterForOnSkillBookReadEvent(
+		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
+		const RE::BGSRefAlias* a_alias)
 	{
 		if (!a_alias)
 		{
@@ -29,7 +37,30 @@ namespace SkillBookUtil
 		regs->Unregister(a_alias);
 	}
 
-	bool AddReadSkillBooksToLists(RE::StaticFunctionTag*, std::vector<RE::BGSListForm*> a_lists)
+	std::string GetSkillName(RE::StaticFunctionTag*, RE::ActorValue a_actorValue)
+	{
+		return SkillBookManager::GetSkillName(a_actorValue);
+	}
+
+	void Notification(RE::StaticFunctionTag*,
+		RE::BGSMessage* a_format,
+		RE::ActorValue a_actorValue,
+		std::string a_soundID)
+	{
+		char strBuf[200];
+		const char* format = a_format->GetFullName();
+		const char* skillName = SkillBookManager::GetSkillName(a_actorValue);
+		snprintf(strBuf, 200, format, skillName);
+
+		const char* sound = a_soundID.empty() ? nullptr : a_soundID.c_str();
+
+		// Don't mind the name, this function is used everywhere in the engine
+		RE::DebugNotification(strBuf, sound, true);
+	}
+
+	bool AddReadSkillBooksToLists(
+		RE::StaticFunctionTag*,
+		std::vector<RE::BGSListForm*> a_lists)
 	{
 		constexpr int32_t numSkills = 18;
 		constexpr int32_t firstSkill = 6;
@@ -63,18 +94,14 @@ namespace SkillBookUtil
 		return booksUpdated > 0;
 	}
 
-	std::string GetSkillName(RE::StaticFunctionTag*, int32_t a_actorValue)
-	{
-		static REL::Relocation<const char*(int32_t)> func{ Offset::GetSkillName };
-		return func(a_actorValue);
-	}
-
 	bool RegisterFuncs(VM* a_vm)
 	{
-		a_vm->RegisterFunction("RegisterForOnSkillBookReadEvent"sv, "RIG_SkillBookUtil"sv, RegisterForOnSkillBookReadEvent, true);
-		a_vm->RegisterFunction("UnregisterForOnSkillBookReadEvent"sv, "RIG_SkillBookUtil"sv, UnregisterForOnSkillBookReadEvent, true);
-		a_vm->RegisterFunction("GetSkillName"sv, "RIG_SkillBookUtil"sv, GetSkillName, true);
-		a_vm->RegisterFunction("AddReadSkillBooksToLists"sv, "RIG_SkillBookUtil"sv, AddReadSkillBooksToLists, true);
+		constexpr std::string_view scriptname = "RIG_SkillBookUtil"sv;
+		REGISTER(a_vm, scriptname, RegisterForOnSkillBookReadEvent);
+		REGISTER(a_vm, scriptname, UnregisterForOnSkillBookReadEvent);
+		REGISTER(a_vm, scriptname, GetSkillName);
+		REGISTER(a_vm, scriptname, Notification);
+		REGISTER(a_vm, scriptname, AddReadSkillBooksToLists);
 
 		return true;
 	}

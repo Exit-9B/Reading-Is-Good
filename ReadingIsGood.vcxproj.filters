@@ -24,6 +24,9 @@
     <ClCompile Include="src\SkillBookUtil.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\SkillBookManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\PCH.h">
@@ -49,6 +52,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\SkillBookUtil.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SkillBookManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

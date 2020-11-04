@@ -59,8 +59,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 	Papyrus::Register();
 	Hooks::Install();
 
-	auto m_intfc = SKSE::GetMessagingInterface();
-	m_intfc->RegisterListener([](SKSE::MessagingInterface::Message* a_msg) {
+	auto skse_msg = SKSE::GetMessagingInterface();
+	skse_msg->RegisterListener([](SKSE::MessagingInterface::Message* a_msg) {
 		if (a_msg->type == SKSE::MessagingInterface::kDataLoaded)
 		{
 			BookHandler::GetSingleton().Initialize();

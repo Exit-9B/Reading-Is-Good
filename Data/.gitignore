@@ -4,5 +4,6 @@
 # Ignore compiled SKSE plugin
 *.dll
 
-# Ignore zip file
+# Ignore bsa and zip file
+*.bsa
 *.zip
