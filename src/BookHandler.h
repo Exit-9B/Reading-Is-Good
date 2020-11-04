@@ -29,6 +29,9 @@ public:
 
 private:
 	BookHandler() = default;
-	BookHandler(const BookHandler& other) = default;
-	BookHandler& operator=(const BookHandler& other) = default;
+	~BookHandler() = default;
+	BookHandler(const BookHandler& other) = delete;
+	BookHandler(BookHandler&& other) = delete;
+	BookHandler& operator=(const BookHandler& other) = delete;
+	BookHandler& operator=(BookHandler&& other) = delete;
 };

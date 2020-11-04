@@ -3,6 +3,8 @@
 class SkillBookManager
 {
 public:
+	SkillBookManager() = delete;
+
 	static void InstallHooks();
 
 	static const char* GetSkillName(RE::ActorValue a_skill);
