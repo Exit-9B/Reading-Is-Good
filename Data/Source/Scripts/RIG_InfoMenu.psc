@@ -116,6 +116,7 @@ EndFunction
 
 Function OnDefaultST()
 	RIG_ShowNotification.SetValueInt(1)
+	SetToggleOptionValueST(true)
 EndFunction
 EndState
 
@@ -128,5 +129,6 @@ EndFunction
 
 Function OnDefaultST()
 	RIG_PlaySound.SetValueInt(1)
+	SetToggleOptionValueST(true)
 EndFunction
 EndState
