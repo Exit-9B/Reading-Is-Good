@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PapyrusProject
+  xmlns="PapyrusProject.xsd"
+  Flags="TESV_Papyrus_Flags.flg"
+  Output="Data\Scripts"
+  Game="sse"
+  Optimize="true" Anonymize="true" Package="true" Zip="true">
+  <Variables>
+    <Variable Name="modname" Value="Reading Is Good"/>
+    <Variable Name="filename" Value="ReadingIsGood"/>
+  </Variables>
+  <Imports>
+    <Import>Data\Source\Scripts</Import>
+    <Import>%SkyUISDKPath%\Scripts\Source</Import>
+    <Import>%SKSE64Path%\Scripts\Source</Import>
+    <Import>%Skyrim64Path%\Data\Source\Scripts</Import>
+  </Imports>
+  <Scripts>
+    <Script>RIG_InfoMenu.psc</Script>
+    <Script>RIG_PlayerRefAliasScript.psc</Script>
+    <Script>RIG_SkillBookUtil.psc</Script>
+  </Scripts>
+  <PreBuildEvent Description="Copy SKSE plugin to distribution" UseInBuild="true">
+    <Command>xcopy "x64\Release\@filename.dll" "Data\SKSE\Plugins\@filename.dll*" /Y</Command>
+  </PreBuildEvent>
+  <Packages Output="Data">
+    <Package Name="@filename" RootDir="Data">
+      <Include NoRecurse="false">Interface</Include>
+      <Include NoRecurse="true">Scripts</Include>
+    </Package>
+  </Packages>
+  <ZipFiles Output="Data">
+    <ZipFile Name="@modname" RootDir="Data" Compression="deflate">
+      <Include>@filename.esp</Include>
+      <Include>@filename.bsa</Include>
+      <Include>SKSE\Plugins\@filename.dll</Include>
+      <Include NoRecurse="true">Source\Scripts</Include>
+    </ZipFile>
+  </ZipFiles>
+</PapyrusProject>
