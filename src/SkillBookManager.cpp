@@ -29,11 +29,9 @@ const char* SkillBookManager::GetSkillName(RE::ActorValue a_skill)
 	return func(a_skill);
 }
 
-void SkillBookManager::ReadSkillBook(
-	RE::TESObjectBOOK* a_book,
-	[[maybe_unused]] float a_increment)
+void SkillBookManager::ReadSkillBook(RE::TESObjectBOOK* a_book, float a_increment)
 {
 	auto skill = a_book->GetSkill();
 	auto regs = OnSkillBookReadRegSet::GetSingleton();
-	regs->QueueEvent(a_book, static_cast<int32_t>(skill));
+	regs->QueueEvent(a_book, skill, static_cast<int32_t>(a_increment));
 }

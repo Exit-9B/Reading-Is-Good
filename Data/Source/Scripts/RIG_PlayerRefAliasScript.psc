@@ -24,7 +24,7 @@ Event OnPlayerLoadGame()
 	RIG_SkillBookUtil.RegisterForOnSkillBookReadEvent(self)
 EndEvent
 
-Event OnSkillBookRead(Book akSkillBook, int aiSkill)
+Event OnSkillBookRead(Book akSkillBook, int aiSkill, int aiIncrement)
 	ReadSkillBook(akSkillBook, aiSkill)
 
 	if (RIG_ShowNotification.GetValueInt())

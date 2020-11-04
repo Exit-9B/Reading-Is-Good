@@ -1,9 +1,10 @@
 #pragma once
 
-class OnSkillBookReadRegSet : public SKSE::RegistrationSet<const RE::TESObjectBOOK*, int32_t>
+class OnSkillBookReadRegSet :
+	public SKSE::RegistrationSet<const RE::TESObjectBOOK*, RE::ActorValue, int32_t>
 {
 public:
-	using Base = SKSE::RegistrationSet<const RE::TESObjectBOOK*, int32_t>;
+	using Base = SKSE::RegistrationSet<const RE::TESObjectBOOK*, RE::ActorValue, int32_t>;
 
 	static OnSkillBookReadRegSet* GetSingleton();
 
