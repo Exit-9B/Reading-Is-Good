@@ -27,9 +27,9 @@ EndEvent
 Event OnSkillBookRead(Book akSkillBook, int aiSkill, int aiIncrement)
 	ReadSkillBook(akSkillBook, aiSkill)
 
-	if (RIG_ShowNotification.GetValueInt())
+	if RIG_ShowNotification.GetValueInt() as bool
 		string sSound = ""
-		if (RIG_PlaySound.GetValueInt())
+		if RIG_PlaySound.GetValueInt() as bool
 			sSound = SoundID
 		endif
 
