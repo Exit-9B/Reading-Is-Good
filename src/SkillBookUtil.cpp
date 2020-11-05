@@ -3,9 +3,8 @@
 #include "SkillBookManager.h"
 #include "BookHandler.h"
 
-#define str(a) #a ## sv
 #define REGISTER(vm, script_name, fn_name) \
-vm->RegisterFunction(str(fn_name), script_name, fn_name, true)
+vm->RegisterFunction(#fn_name ## sv, script_name, fn_name, true)
 
 namespace SkillBookUtil
 {
@@ -47,6 +46,9 @@ namespace SkillBookUtil
 		RE::ActorValue a_actorValue,
 		std::string a_soundID)
 	{
+		if (!a_format)
+			return;
+
 		char strBuf[200];
 		const char* format = a_format->GetFullName();
 		const char* skillName = SkillBookManager::GetSkillName(a_actorValue);
@@ -55,7 +57,7 @@ namespace SkillBookUtil
 		const char* sound = a_soundID.empty() ? nullptr : a_soundID.c_str();
 
 		// Don't mind the name, this function is used everywhere in the engine
-		RE::DebugNotification(strBuf, sound, true);
+		RE::DebugNotification(strBuf, sound, false);
 	}
 
 	bool AddReadSkillBooksToLists(

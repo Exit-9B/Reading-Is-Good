@@ -4,4 +4,3 @@ $Settings	Settings
 $Show Notification	Show Notification
 $Skill Book Settings	Skill Book Settings
 $Status	Status
-$sInsightGained	%s	insight gained.
