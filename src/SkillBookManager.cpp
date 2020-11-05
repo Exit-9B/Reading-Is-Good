@@ -20,7 +20,7 @@ void SkillBookManager::InstallHooks()
 
 	REL::safe_write(hook.address(), patch.getCode(), patch.getSize());
 
-	logger::info("Installed hooks for (%s)", typeid(SkillBookManager).name());
+	logger::info("Installed hooks for {}", typeid(SkillBookManager).name());
 }
 
 const char* SkillBookManager::GetSkillName(RE::ActorValue a_skill)

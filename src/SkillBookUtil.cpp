@@ -90,7 +90,7 @@ namespace SkillBookUtil
 
 		if (booksUpdated > 0)
 		{
-			logger::info("Found (%i) skill books read before installing"sv, booksUpdated);
+			logger::info("Found {} skill books read before installing"sv, booksUpdated);
 		}
 
 		return booksUpdated > 0;
