@@ -5,7 +5,11 @@
 
 void SkillBookManager::InstallHooks()
 {
+#ifndef VR
 	REL::Relocation<std::uintptr_t> hook{ Offset::TESObjectBOOK_Read, 0xA3 };
+#else
+	REL::Relocation<std::uintptr_t> hook{ Offset::TESObjectBOOK_Read + 0xA3 };
+#endif
 
 	struct Patch : Xbyak::CodeGenerator {
 		Patch() {
