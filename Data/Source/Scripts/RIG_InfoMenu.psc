@@ -39,7 +39,8 @@ Event OnPageReset(string a_page)
 		while iSkillIndex < 18
 			string sSkillName = RIG_SkillBookUtil.GetSkillName(iSkillIndex + 6)
 			int iCount = BookCount(iSkillIndex)
-			int iBonusPercent = (PlayerAlias.GetSkillBonus(iCount) * 100) as int
+			float fBonus = PlayerAlias.GetSkillBonus(iCount)
+			int iBonusPercent = ((fBonus * 100.0) + 0.5) as int
 			int iFlag = GetFlag(iCount)
 			BookListOptions[iSkillIndex] =\
 				AddMenuOption(sSkillName, iBonusPercent + "%", iFlag)
