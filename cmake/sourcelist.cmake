@@ -10,5 +10,6 @@ set(sources ${sources}
     src/ReferenceAliasExt.cpp
     src/SkillBookUtil.cpp
 
+    src/BookHandler.cpp
     src/main.cpp
 )

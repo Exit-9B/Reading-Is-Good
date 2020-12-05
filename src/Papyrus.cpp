@@ -3,19 +3,16 @@
 #include "ReferenceAliasExt.h"
 #include "SkillBookUtil.h"
 
-namespace Papyrus
+void Papyrus::Register()
 {
-	void Register()
-	{
-		auto papyrus = SKSE::GetPapyrusInterface();
+	auto papyrus = SKSE::GetPapyrusInterface();
 
-		papyrus->Register(FormExt::RegisterFuncs);
-		logger::info("Registered RIG_FormExt"sv);
+	papyrus->Register(FormExt::RegisterFuncs);
+	logger::info("Registered RIG_FormExt"sv);
 
-		papyrus->Register(ReferenceAliasExt::RegisterFuncs);
-		logger::info("Registered RIG_ReferenceAliasExt"sv);
+	papyrus->Register(ReferenceAliasExt::RegisterFuncs);
+	logger::info("Registered RIG_ReferenceAliasExt"sv);
 
-		papyrus->Register(SkillBookUtil::RegisterFuncs);
-		logger::info("Registered RIG_SkillBookUtil"sv);
-	}
+	papyrus->Register(SkillBookUtil::RegisterFuncs);
+	logger::info("Registered RIG_SkillBookUtil"sv);
 }

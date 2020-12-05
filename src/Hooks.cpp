@@ -4,11 +4,8 @@
 #include "Registration.h"
 #include "xbyak/xbyak.h"
 
-namespace Hooks
+void Hooks::Install()
 {
-	void Install()
-	{
-		SkillBookManager::InstallHooks();
-		logger::info("Installed all hooks");
-	}
+	SkillBookManager::InstallHooks();
+	logger::info("Installed all hooks");
 }
