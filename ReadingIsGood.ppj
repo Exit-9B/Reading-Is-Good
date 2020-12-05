@@ -21,7 +21,7 @@
     <Script>RIG_SkillBookUtil.psc</Script>
   </Scripts>
   <PreBuildEvent Description="Copy SKSE plugin to distribution" UseInBuild="true">
-    <Command>xcopy "x64\Release\@filename.dll" "Data\SKSE\Plugins\@filename.dll*" /Y</Command>
+    <Command>xcopy "build\Release\@filename.dll" "Data\SKSE\Plugins\@filename.dll*" /Y</Command>
   </PreBuildEvent>
   <Packages Output="Data">
     <Package Name="@filename" RootDir="Data">
