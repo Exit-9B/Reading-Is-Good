@@ -3,27 +3,9 @@
 class BookHandler
 {
 public:
-	static BookHandler& GetSingleton()
-	{
-		static BookHandler instance;
-		return instance;
-	}
+	static BookHandler& GetSingleton();
 
-	void Initialize()
-	{
-		SkillBooks.clear();
-
-		auto dataHandler = RE::TESDataHandler::GetSingleton();
-		auto books = dataHandler->GetFormArray<RE::TESObjectBOOK>();
-
-		for (auto book : books)
-		{
-			if (book->TeachesSkill())
-			{
-				SkillBooks[book] = book->GetSkill();
-			}
-		}
-	}
+	void Initialize();
 
 	std::map<RE::TESObjectBOOK*, RE::ActorValue> SkillBooks;
 
