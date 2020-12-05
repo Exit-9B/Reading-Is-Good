@@ -8,34 +8,6 @@ vm->RegisterFunction(#fn_name ## sv, script_name, fn_name, true)
 
 namespace SkillBookUtil
 {
-	void RegisterForOnSkillBookReadEvent(
-		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
-		const RE::BGSRefAlias* a_alias)
-	{
-		if (!a_alias)
-		{
-			a_vm->TraceStack("akAlias is a NONE alias!", a_stackID, Severity::kWarning);
-			return;
-		}
-
-		auto regs = OnSkillBookReadRegSet::GetSingleton();
-		regs->Register(a_alias);
-	}
-
-	void UnregisterForOnSkillBookReadEvent(
-		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
-		const RE::BGSRefAlias* a_alias)
-	{
-		if (!a_alias)
-		{
-			a_vm->TraceStack("akAlias is a NONE alias!", a_stackID, Severity::kWarning);
-			return;
-		}
-
-		auto regs = OnSkillBookReadRegSet::GetSingleton();
-		regs->Unregister(a_alias);
-	}
-
 	std::string GetSkillName(RE::StaticFunctionTag*, RE::ActorValue a_actorValue)
 	{
 		return SkillBookManager::GetSkillName(a_actorValue);
@@ -99,8 +71,6 @@ namespace SkillBookUtil
 	bool RegisterFuncs(VM* a_vm)
 	{
 		constexpr std::string_view scriptname = "RIG_SkillBookUtil"sv;
-		REGISTER(a_vm, scriptname, RegisterForOnSkillBookReadEvent);
-		REGISTER(a_vm, scriptname, UnregisterForOnSkillBookReadEvent);
 		REGISTER(a_vm, scriptname, GetSkillName);
 		REGISTER(a_vm, scriptname, Notification);
 		REGISTER(a_vm, scriptname, AddReadSkillBooksToLists);

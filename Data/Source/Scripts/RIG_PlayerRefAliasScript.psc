@@ -1,5 +1,7 @@
 Scriptname RIG_PlayerRefAliasScript extends ReferenceAlias
 
+Import RIG_SkillBookUtil
+
 FormList[] Property RIG_ReadBookLists  Auto
 Perk Property RIG_LearningPerk  Auto
 Perk Property RIG_BlackBookPerk  Auto
@@ -13,15 +15,15 @@ string Property SoundID  Auto
 Event OnInit()
 	AddPerks()
 
-	RIG_SkillBookUtil.AddReadSkillBooksToLists(RIG_ReadBookLists)
+	AddReadSkillBooksToLists(RIG_ReadBookLists)
 	RefreshPerks()
 
-	RIG_SkillBookUtil.RegisterForOnSkillBookReadEvent(self)
+	RegisterForOnSkillBookReadEvent(self)
 EndEvent
 
 Event OnPlayerLoadGame()
 	RefreshPerks()
-	RIG_SkillBookUtil.RegisterForOnSkillBookReadEvent(self)
+	RegisterForOnSkillBookReadEvent(self)
 EndEvent
 
 Event OnSkillBookRead(Book akSkillBook, int aiSkill, int aiIncrement)
@@ -33,10 +35,7 @@ Event OnSkillBookRead(Book akSkillBook, int aiSkill, int aiIncrement)
 			sSound = SoundID
 		endif
 
-		RIG_SkillBookUtil.Notification(\
-				RIG_InsightGainedMessage, \
-				aiSkill, \
-				sSound)
+		Notification(RIG_InsightGainedMessage, aiSkill, sSound)
 	endif
 EndEvent
 

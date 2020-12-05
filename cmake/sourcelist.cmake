@@ -6,6 +6,7 @@ set(sources ${sources}
 
     src/Papyrus.cpp
     src/Registration.cpp
+    src/ReferenceAliasExt.cpp
     src/SkillBookUtil.cpp
 
     src/main.cpp

@@ -18,6 +18,7 @@
   <Scripts>
     <Script>RIG_InfoMenu.psc</Script>
     <Script>RIG_PlayerRefAliasScript.psc</Script>
+    <Script>RIG_ReferenceAliasExt.psc</Script>
     <Script>RIG_SkillBookUtil.psc</Script>
   </Scripts>
   <PreBuildEvent Description="Copy SKSE plugin to distribution" UseInBuild="true">
