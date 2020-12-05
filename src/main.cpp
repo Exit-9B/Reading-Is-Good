@@ -1,5 +1,4 @@
-﻿#include "version.h"
-#include "Papyrus.h"
+﻿#include "Papyrus.h"
 #include "Hooks.h"
 #include "BookHandler.h"
 
@@ -29,11 +28,9 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 	spdlog::set_default_logger(std::move(log));
 	spdlog::set_pattern("%g(%#): [%^%l%$] %v"s);
 
-	logger::info(FMT_STRING("ReadingIsGood v{}"), RIG_VERSION_VERSTRING);
-
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
 	a_info->name = "ReadingIsGood";
-	a_info->version = RIG_VERSION_MAJOR;
+	a_info->version = 1;
 
 	if (a_skse->IsEditor()) {
 		logger::critical("Loaded in editor, marking as incompatible"sv);
