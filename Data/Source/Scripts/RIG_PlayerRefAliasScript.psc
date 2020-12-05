@@ -1,5 +1,6 @@
 Scriptname RIG_PlayerRefAliasScript extends ReferenceAlias
 
+Import RIG_ReferenceAliasExt
 Import RIG_SkillBookUtil
 
 FormList[] Property RIG_ReadBookLists  Auto
@@ -18,12 +19,12 @@ Event OnInit()
 	AddReadSkillBooksToLists(RIG_ReadBookLists)
 	RefreshPerks()
 
-	RegisterForOnSkillBookReadEvent(self)
+	RegisterForSkillBookReadEvent(self)
 EndEvent
 
 Event OnPlayerLoadGame()
 	RefreshPerks()
-	RegisterForOnSkillBookReadEvent(self)
+	RegisterForSkillBookReadEvent(self)
 EndEvent
 
 Event OnSkillBookRead(Book akSkillBook, int aiSkill, int aiIncrement)
