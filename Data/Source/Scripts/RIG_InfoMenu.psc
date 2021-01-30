@@ -40,6 +40,9 @@ Event OnPageReset(string a_page)
 			string sSkillName = RIG_SkillBookUtil.GetSkillName(iSkillIndex + 6)
 			int iCount = BookCount(iSkillIndex)
 			float fBonus = PlayerAlias.GetSkillBonus(iCount)
+			if PlayerAlias.GetActorRef().HasPerk(PlayerAlias.RIG_BlackBookPerk)
+				fBonus *= 2.0
+			endif
 			int iBonusPercent = ((fBonus * 100.0) + 0.5) as int
 			int iFlag = GetFlag(iCount)
 			BookListOptions[iSkillIndex] =\
