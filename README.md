@@ -23,6 +23,5 @@ Don't save your skill books for later!
 git clone https://github.com/Exit-9B/Reading-Is-Good
 cd Reading-Is-Good
 git submodule update --init --recursive
-git submodule update --recursive --remote
 cmake -B build -S .
 ```
