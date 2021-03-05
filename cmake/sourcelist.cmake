@@ -6,8 +6,9 @@ set(sources ${sources}
 
     src/Papyrus.cpp
     src/Registration.cpp
+    src/ActiveMagicEffectExt.cpp
+    src/AliasExt.cpp
     src/FormExt.cpp
-    src/ReferenceAliasExt.cpp
     src/SkillBookUtil.cpp
 
     src/BookHandler.cpp

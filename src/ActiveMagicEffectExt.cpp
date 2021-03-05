@@ -1,16 +1,16 @@
-#include "ReferenceAliasExt.h"
+#include "ActiveMagicEffectExt.h"
 #include "Registration.h"
 
 #define REGISTER(vm, script_name, fn_name) \
 vm->RegisterFunction(#fn_name ## sv, script_name, fn_name, true)
 
-void ReferenceAliasExt::RegisterForSkillBookReadEvent(
+void ActiveMagicEffectExt::RegisterForSkillBookReadEvent(
 	VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
-	const RE::BGSRefAlias* a_alias)
+	const RE::ActiveEffect* a_alias)
 {
 	if (!a_alias)
 	{
-		a_vm->TraceStack("akAlias is a NONE alias!", a_stackID, Severity::kWarning);
+		a_vm->TraceStack("akEffect is a NONE alias!", a_stackID, Severity::kWarning);
 		return;
 	}
 
@@ -18,13 +18,13 @@ void ReferenceAliasExt::RegisterForSkillBookReadEvent(
 	regs->Register(a_alias);
 }
 
-void ReferenceAliasExt::UnregisterForSkillBookReadEvent(
+void ActiveMagicEffectExt::UnregisterForSkillBookReadEvent(
 	VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
-	const RE::BGSRefAlias* a_alias)
+	const RE::ActiveEffect* a_alias)
 {
 	if (!a_alias)
 	{
-		a_vm->TraceStack("akAlias is a NONE alias!", a_stackID, Severity::kWarning);
+		a_vm->TraceStack("akEffect is a NONE alias!", a_stackID, Severity::kWarning);
 		return;
 	}
 
@@ -32,9 +32,9 @@ void ReferenceAliasExt::UnregisterForSkillBookReadEvent(
 	regs->Unregister(a_alias);
 }
 
-bool ReferenceAliasExt::RegisterFuncs(VM* a_vm)
+bool ActiveMagicEffectExt::RegisterFuncs(VM* a_vm)
 {
-	constexpr std::string_view scriptname = "RIG_ReferenceAliasExt"sv;
+	constexpr std::string_view scriptname = "RIG_ActiveMagicEffectExt"sv;
 	REGISTER(a_vm, scriptname, RegisterForSkillBookReadEvent);
 	REGISTER(a_vm, scriptname, UnregisterForSkillBookReadEvent);
 

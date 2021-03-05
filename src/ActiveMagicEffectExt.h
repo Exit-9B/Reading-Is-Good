@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ReferenceAliasExt
+namespace ActiveMagicEffectExt
 {
 	using VM = RE::BSScript::IVirtualMachine;
 	using StackID = RE::VMStackID;
@@ -8,11 +8,11 @@ namespace ReferenceAliasExt
 
 	void RegisterForSkillBookReadEvent(
 		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
-		const RE::BGSRefAlias* a_alias);
+		const RE::ActiveEffect* a_alias);
 
 	void UnregisterForSkillBookReadEvent(
 		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
-		const RE::BGSRefAlias* a_alias);
+		const RE::ActiveEffect* a_alias);
 
 	bool RegisterFuncs(VM* a_vm);
 }

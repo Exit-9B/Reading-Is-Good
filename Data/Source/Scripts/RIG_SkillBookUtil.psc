@@ -8,13 +8,3 @@ Function Notification(\
 		string asSoundID = "") global native
 
 bool Function AddReadSkillBooksToLists(FormList[] akBookLists) global native
-
-; DEPRECATED
-Function RegisterForOnSkillBookReadEvent(ReferenceAlias akAlias) global
-	RIG_ReferenceAliasExt.RegisterForSkillBookReadEvent(akAlias)
-EndFunction
-
-; DEPRECATED
-Function UnregisterForOnSkillBookReadEvent(ReferenceAlias akAlias) global
-	RIG_ReferenceAliasExt.UnregisterForSkillBookReadEvent(akAlias)
-EndFunction

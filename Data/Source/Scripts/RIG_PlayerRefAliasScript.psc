@@ -1,6 +1,6 @@
 Scriptname RIG_PlayerRefAliasScript extends ReferenceAlias
 
-Import RIG_ReferenceAliasExt
+Import RIG_AliasExt
 Import RIG_SkillBookUtil
 
 FormList[] Property RIG_ReadBookLists  Auto

@@ -8,8 +8,9 @@ set(headers ${headers}
 
     src/Papyrus.h
     src/Registration.h
+    src/ActiveMagicEffectExt.h
+    src/AliasExt.h
     src/FormExt.h
-    src/ReferenceAliasExt.h
     src/SkillBookUtil.h
 
     src/BookHandler.h
