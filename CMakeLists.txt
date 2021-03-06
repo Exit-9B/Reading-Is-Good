@@ -7,7 +7,7 @@ set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "")
 
 project(
 	ReadingIsGood
-	VERSION 1.0.2
+	VERSION 1.0.4
 	LANGUAGES CXX
 )
 
