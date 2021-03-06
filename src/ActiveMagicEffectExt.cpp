@@ -10,7 +10,7 @@ void ActiveMagicEffectExt::RegisterForSkillBookReadEvent(
 {
 	if (!a_alias)
 	{
-		a_vm->TraceStack("akEffect is a NONE alias!", a_stackID, Severity::kWarning);
+		a_vm->TraceStack("akEffect is a NONE effect!", a_stackID, Severity::kWarning);
 		return;
 	}
 
@@ -24,7 +24,7 @@ void ActiveMagicEffectExt::UnregisterForSkillBookReadEvent(
 {
 	if (!a_alias)
 	{
-		a_vm->TraceStack("akEffect is a NONE alias!", a_stackID, Severity::kWarning);
+		a_vm->TraceStack("akEffect is a NONE effect!", a_stackID, Severity::kWarning);
 		return;
 	}
 
