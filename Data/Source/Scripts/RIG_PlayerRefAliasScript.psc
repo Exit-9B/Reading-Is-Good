@@ -23,6 +23,8 @@ Event OnInit()
 EndEvent
 
 Event OnPlayerLoadGame()
+	AddPerks()
+
 	AddReadSkillBooksToLists(RIG_ReadBookLists)
 	RefreshPerks()
 

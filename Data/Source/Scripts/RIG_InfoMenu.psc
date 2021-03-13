@@ -4,6 +4,8 @@ RIG_PlayerRefAliasScript Property PlayerAlias  Auto
 GlobalVariable Property RIG_ShowNotification  Auto
 GlobalVariable Property RIG_PlaySound  Auto
 
+Perk Property DLC2BlackBookSkillBookPerk  Auto
+
 int[] BookListOptions
 
 int Function GetVersion()
@@ -40,7 +42,7 @@ Event OnPageReset(string a_page)
 			string sSkillName = RIG_SkillBookUtil.GetSkillName(iSkillIndex + 6)
 			int iCount = BookCount(iSkillIndex)
 			float fBonus = PlayerAlias.GetSkillBonus(iCount)
-			if PlayerAlias.GetActorRef().HasPerk(PlayerAlias.RIG_BlackBookPerk)
+			if PlayerAlias.GetActorRef().HasPerk(DLC2BlackBookSkillBookPerk)
 				fBonus *= 2.0
 			endif
 			int iBonusPercent = ((fBonus * 100.0) + 0.5) as int
