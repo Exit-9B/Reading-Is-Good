@@ -2,16 +2,16 @@
 <PapyrusProject
   xmlns="PapyrusProject.xsd"
   Flags="TESV_Papyrus_Flags.flg"
-  Output="Data\Scripts"
+  Output="dist\Data\Scripts"
   Game="sse"
   Optimize="true" Anonymize="true" Package="true" Zip="true">
   <Variables>
     <Variable Name="modname" Value="Reading Is Good"/>
     <Variable Name="filename" Value="ReadingIsGood"/>
-    <Variable Name="temppath" Value="temp"/>
+    <Variable Name="temppath" Value="dist\temp"/>
   </Variables>
   <Imports>
-    <Import>Data\Source\Scripts</Import>
+    <Import>dist\Data\Source\Scripts</Import>
     <Import>%SkyUISDKPath%\Scripts\Source</Import>
     <Import>%MCMPath%\Source\Scripts</Import>
     <Import>%SKSE64Path%\Scripts\Source</Import>
@@ -32,16 +32,16 @@
     <Command>rmdir "@temppath" /s /q</Command>
   </PostBuildEvent>
   <Packages Output="@temppath">
-    <Package Name="SkyrimSE\@filename" RootDir="Data">
+    <Package Name="SkyrimSE\@filename" RootDir="dist\Data">
       <Include NoRecurse="false">Interface</Include>
       <Include NoRecurse="true">Scripts</Include>
     </Package>
-    <Package Name="SkyrimVR\@filename" RootDir="Data">
+    <Package Name="SkyrimVR\@filename" RootDir="dist\Data">
       <Include NoRecurse="false">Interface</Include>
       <Include NoRecurse="true">Scripts</Include>
     </Package>
   </Packages>
-  <ZipFiles Output=".">
+  <ZipFiles Output="dist">
     <ZipFile Name="@modname SE" RootDir="@temppath\SkyrimSE" Compression="deflate">
       <Include>@filename.esp</Include>
       <Include>@filename.bsa</Include>
