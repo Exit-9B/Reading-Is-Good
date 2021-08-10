@@ -6,6 +6,6 @@ OnSkillBookReadRegSet* OnSkillBookReadRegSet::GetSingleton()
 	return std::addressof(singleton);
 }
 
-OnSkillBookReadRegSet::OnSkillBookReadRegSet() :
-	Base("OnSkillBookRead"sv)
-{ }
+OnSkillBookReadRegSet::OnSkillBookReadRegSet() : Base("OnSkillBookRead"sv)
+{
+}

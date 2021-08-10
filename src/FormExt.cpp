@@ -2,14 +2,15 @@
 #include "Registration.h"
 
 #define REGISTER(vm, script_name, fn_name) \
-vm->RegisterFunction(#fn_name ## sv, script_name, fn_name, true)
+	vm->RegisterFunction(#fn_name##sv, script_name, fn_name, true)
 
 void FormExt::RegisterForSkillBookReadEvent(
-	VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
+	VM* a_vm,
+	StackID a_stackID,
+	RE::StaticFunctionTag*,
 	const RE::TESForm* a_form)
 {
-	if (!a_form)
-	{
+	if (!a_form) {
 		a_vm->TraceStack("akForm is a NONE form!", a_stackID, Severity::kWarning);
 		return;
 	}
@@ -19,11 +20,12 @@ void FormExt::RegisterForSkillBookReadEvent(
 }
 
 void FormExt::UnregisterForSkillBookReadEvent(
-	VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
+	VM* a_vm,
+	StackID a_stackID,
+	RE::StaticFunctionTag*,
 	const RE::TESForm* a_form)
 {
-	if (!a_form)
-	{
+	if (!a_form) {
 		a_vm->TraceStack("akForm is a NONE form!", a_stackID, Severity::kWarning);
 		return;
 	}

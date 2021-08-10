@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <stringapiset.h>
 
-auto Encoding::Utf8ToUtf16(const std::string& a_utf8) noexcept -> std::wstring
+std::wstring Encoding::Utf8ToUtf16(const std::string& a_utf8) noexcept
 {
 	std::wstring utf16;
 	if (a_utf8.empty()) {
@@ -49,7 +49,7 @@ auto Encoding::Utf8ToUtf16(const std::string& a_utf8) noexcept -> std::wstring
 	return utf16;
 }
 
-auto Encoding::Utf16ToUtf8(const std::wstring& a_utf16) noexcept -> std::string
+std::string Encoding::Utf16ToUtf8(const std::wstring& a_utf16) noexcept
 {
 	std::string utf8;
 	if (a_utf16.empty()) {
