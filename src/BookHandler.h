@@ -3,7 +3,7 @@
 class BookHandler
 {
 public:
-	static BookHandler& GetSingleton();
+	static BookHandler* GetSingleton();
 
 	void Initialize();
 

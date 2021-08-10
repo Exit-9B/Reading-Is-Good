@@ -7,5 +7,5 @@
 void Hooks::Install()
 {
 	SkillBookManager::InstallHooks();
-	logger::info("Installed all hooks");
+	logger::info("Installed all hooks"sv);
 }

@@ -1,3 +1,4 @@
+$RIG_InsightGained{}	Intuizione per {} ottenuta.
 $Current Bonuses	Bonus attuali
 $Play Sound	Effetti sonori
 $Settings	Impostazioni

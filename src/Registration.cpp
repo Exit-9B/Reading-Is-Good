@@ -3,7 +3,7 @@
 OnSkillBookReadRegSet* OnSkillBookReadRegSet::GetSingleton()
 {
 	static OnSkillBookReadRegSet singleton;
-	return &singleton;
+	return std::addressof(singleton);
 }
 
 OnSkillBookReadRegSet::OnSkillBookReadRegSet() :

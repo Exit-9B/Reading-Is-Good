@@ -1,4 +1,4 @@
-set(sources ${sources}
+set(SOURCES ${SOURCES}
     src/PCH.cpp
 
     src/Hooks.cpp
@@ -12,5 +12,9 @@ set(sources ${sources}
     src/SkillBookUtil.cpp
 
     src/BookHandler.cpp
+
+    src/Encoding.cpp
+    src/Translation.cpp
+
     src/main.cpp
 )

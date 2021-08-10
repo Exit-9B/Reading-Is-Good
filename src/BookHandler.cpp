@@ -1,9 +1,9 @@
 #include "BookHandler.h"
 
-BookHandler& BookHandler::GetSingleton()
+BookHandler* BookHandler::GetSingleton()
 {
 	static BookHandler instance;
-	return instance;
+	return std::addressof(instance);
 }
 
 void BookHandler::Initialize()
