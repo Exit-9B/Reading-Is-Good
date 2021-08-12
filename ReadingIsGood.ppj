@@ -46,12 +46,14 @@
       <Include>@filename.esp</Include>
       <Include>@filename.bsa</Include>
       <Include>SKSE\Plugins\@filename.dll</Include>
+      <Include NoRecurse="true">MCM\Config\@filename</Include>
       <Include NoRecurse="true">Source\Scripts</Include>
     </ZipFile>
     <ZipFile Name="@modname VR" RootDir="@temppath\SkyrimVR" Compression="deflate">
       <Include>@filename.esp</Include>
       <Include>@filename.bsa</Include>
       <Include>SKSE\Plugins\@filename.dll</Include>
+      <Include NoRecurse="true">MCM\Config\@filename</Include>
       <Include NoRecurse="true">Source\Scripts</Include>
     </ZipFile>
   </ZipFiles>
