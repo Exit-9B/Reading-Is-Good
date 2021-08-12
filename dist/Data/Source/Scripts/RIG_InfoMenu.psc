@@ -32,7 +32,7 @@ EndEvent
 
 Event OnPageReset(string a_page)
 	if a_page == ""
-		LoadCustomContent("ReadingIsGood/RIG_splash.dds")
+		LoadCustomContent("ReadingIsGood/RIG_splash.dds", 128, 173)
 		return
 	else
 		UnloadCustomContent()
