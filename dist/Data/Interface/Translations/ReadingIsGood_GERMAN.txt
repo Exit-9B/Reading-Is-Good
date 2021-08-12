@@ -1,0 +1,7 @@
+$RIG_InsightGained{}	{} Erkentnisse gewonnen
+$Current Bonuses	Aktuelle Boni
+$Play Sound	Ton Abspielen
+$Settings	Einstellungen
+$Show Notification	Benachrichtigungen anzeigen
+$Skill Book Settings	Fertigkeitsbuch Einstellungen
+$Status	Status

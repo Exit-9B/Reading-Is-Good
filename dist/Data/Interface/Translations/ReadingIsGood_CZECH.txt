@@ -1,3 +1,4 @@
+$RIG_InsightGained{}	{} insight gained.
 $Current Bonuses	Current Bonuses
 $Play Sound	Play Sound
 $Settings	Settings

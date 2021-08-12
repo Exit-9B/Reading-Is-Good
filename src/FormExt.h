@@ -7,11 +7,15 @@ namespace FormExt
 	using Severity = RE::BSScript::ErrorLogger::Severity;
 
 	void RegisterForSkillBookReadEvent(
-		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
+		VM* a_vm,
+		StackID a_stackID,
+		RE::StaticFunctionTag*,
 		const RE::TESForm* a_form);
 
 	void UnregisterForSkillBookReadEvent(
-		VM* a_vm, StackID a_stackID, RE::StaticFunctionTag*,
+		VM* a_vm,
+		StackID a_stackID,
+		RE::StaticFunctionTag*,
 		const RE::TESForm* a_form);
 
 	bool RegisterFuncs(VM* a_vm);

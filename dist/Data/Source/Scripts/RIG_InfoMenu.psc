@@ -6,26 +6,33 @@ GlobalVariable Property RIG_PlaySound  Auto
 
 Perk Property DLC2BlackBookSkillBookPerk  Auto
 
+string Property PluginName = "ReadingIsGood" AutoReadOnly
+
 int[] BookListOptions
 
 int Function GetVersion()
 	return 1
 EndFunction
 
-Event OnInit()
-	parent.OnInit()
-	BookListOptions = new int[18]
-EndEvent
-
 Event OnConfigInit()
+	BookListOptions = new int[18]
+
 	Pages = new string[2]
 	Pages[0] = "$Status"
 	Pages[1] = "$Settings"
+
+	LoadModSettings()
+EndEvent
+
+Event OnGameReload()
+	parent.OnGameReload()
+
+	LoadModSettings()
 EndEvent
 
 Event OnPageReset(string a_page)
 	if a_page == ""
-		LoadCustomContent("ReadingIsGood/RIG_splash.dds")
+		LoadCustomContent("ReadingIsGood/RIG_splash.dds", 128, 173)
 		return
 	else
 		UnloadCustomContent()
@@ -47,8 +54,7 @@ Event OnPageReset(string a_page)
 			endif
 			int iBonusPercent = ((fBonus * 100.0) + 0.5) as int
 			int iFlag = GetFlag(iCount)
-			BookListOptions[iSkillIndex] =\
-				AddMenuOption(sSkillName, iBonusPercent + "%", iFlag)
+			BookListOptions[iSkillIndex] = AddMenuOption(sSkillName, iBonusPercent + "%", iFlag)
 			iSkillIndex += 1
 		endwhile
 	elseif a_page == "$Settings"
@@ -81,10 +87,22 @@ Event OnOptionMenuOpen(int a_option)
 	endwhile
 
 	if iSkillIndex < 18
-		SetMenuDialogOptions(\
-				ToStringArray(PlayerAlias.RIG_ReadBookLists[iSkillIndex]))
+		SetMenuDialogOptions(ToStringArray(PlayerAlias.RIG_ReadBookLists[iSkillIndex]))
 	endif
 EndEvent
+
+Function LoadModSettings()
+	if (MCM.GetVersionCode() > 0)
+		RIG_ShowNotification.SetValueInt(\
+				MCM.GetModSettingBool(PluginName, "bShowNotification:Notification") as int)
+		RIG_PlaySound.SetValueInt(\
+				MCM.GetModSettingBool(PluginName, "bPlaySound:Notification") as int)
+		PlayerAlias.RIG_BonusPerBook.SetValue(\
+				MCM.GetModSettingFloat(PluginName, "fBonusPerBook:Bonus"))
+		PlayerAlias.RIG_MaxBooks.SetValueInt(\
+				MCM.GetModSettingInt(PluginName, "iMaxBooks:Bonus"))
+	endif
+EndFunction
 
 int Function BookCount(int a_skillIndex)
 	return PlayerAlias.RIG_ReadBookLists[a_skillIndex].GetSize()
@@ -115,6 +133,7 @@ State ShowNotification
 Function OnSelectST()
 	bool bEnabled = RIG_ShowNotification.GetValueInt() as bool
 	RIG_ShowNotification.SetValueInt((!bEnabled) as int)
+	MCM.SetModSettingBool(PluginName, "bShowNotification:Notification", !bEnabled)
 	SetToggleOptionValueST(!bEnabled)
 	GotoState("PlaySound")
 	SetOptionFlagsST(OPTION_FLAG_DISABLED * (bEnabled as int))
@@ -122,6 +141,7 @@ EndFunction
 
 Function OnDefaultST()
 	RIG_ShowNotification.SetValueInt(1)
+	MCM.SetModSettingBool(PluginName, "bShowNotification:Notification", true)
 	SetToggleOptionValueST(true)
 EndFunction
 EndState
@@ -129,12 +149,14 @@ EndState
 State PlaySound
 Function OnSelectST()
 	bool bEnabled = RIG_PlaySound.GetValueInt() as bool
+	MCM.SetModSettingBool(PluginName, "bPlaySound:Notification", !bEnabled)
 	RIG_PlaySound.SetValueInt((!bEnabled) as int)
 	SetToggleOptionValueST(!bEnabled)
 EndFunction
 
 Function OnDefaultST()
 	RIG_PlaySound.SetValueInt(1)
+	MCM.SetModSettingBool(PluginName, "bPlaySound:Notification", true)
 	SetToggleOptionValueST(true)
 EndFunction
 EndState

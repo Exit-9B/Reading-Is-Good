@@ -1,6 +1,0 @@
-$Current Bonuses	Bonus attuali
-$Play Sound	Effetti sonori
-$Settings	Impostazioni
-$Show Notification	Notifiche
-$Skill Book Settings	Impostazioni libri di abilità
-$Status	Stato

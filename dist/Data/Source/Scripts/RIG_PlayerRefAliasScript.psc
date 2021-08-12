@@ -10,8 +10,10 @@ GlobalVariable Property RIG_BonusPerBook  Auto
 GlobalVariable Property RIG_MaxBooks  Auto
 GlobalVariable Property RIG_ShowNotification  Auto
 GlobalVariable Property RIG_PlaySound  Auto
-Message Property RIG_InsightGainedMessage  Auto
 string Property SoundID  Auto
+
+; Deprecated
+Message Property RIG_InsightGainedMessage  Auto
 
 Event OnInit()
 	AddPerks()
@@ -40,7 +42,8 @@ Event OnSkillBookRead(Book akSkillBook, int aiSkill, int aiIncrement)
 			sSound = SoundID
 		endif
 
-		Notification(RIG_InsightGainedMessage, aiSkill, sSound)
+		string sSkillName = GetSkillName(aiSkill)
+		TranslateNotification("$RIG_InsightGained{" + sSkillName + "}", sSound)
 	endif
 EndEvent
 

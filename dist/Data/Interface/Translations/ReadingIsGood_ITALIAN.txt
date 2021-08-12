@@ -1,0 +1,7 @@
+$RIG_InsightGained{}	Conoscenza in {} ottenuta.
+$Current Bonuses	Bonus Attuali
+$Play Sound	Effetti Sonori
+$Settings	Impostazioni
+$Show Notification	Mostra Notifica
+$Skill Book Settings	Impostazioni Libri Abilità
+$Status	Stato

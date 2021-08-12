@@ -2,16 +2,18 @@
 <PapyrusProject
   xmlns="PapyrusProject.xsd"
   Flags="TESV_Papyrus_Flags.flg"
-  Output="Data\Scripts"
+  Output="dist\Data\Scripts"
   Game="sse"
   Optimize="true" Anonymize="true" Package="true" Zip="true">
   <Variables>
     <Variable Name="modname" Value="Reading Is Good"/>
     <Variable Name="filename" Value="ReadingIsGood"/>
+    <Variable Name="temppath" Value="dist\temp"/>
   </Variables>
   <Imports>
-    <Import>Data\Source\Scripts</Import>
+    <Import>dist\Data\Source\Scripts</Import>
     <Import>%SkyUISDKPath%\Scripts\Source</Import>
+    <Import>%MCMPath%\Source\Scripts</Import>
     <Import>%SKSE64Path%\Scripts\Source</Import>
     <Import>%Skyrim64Path%\Data\Source\Scripts</Import>
   </Imports>
@@ -23,20 +25,35 @@
     <Script>RIG_FormExt.psc</Script>
     <Script>RIG_SkillBookUtil.psc</Script>
   </Scripts>
-  <PreBuildEvent Description="Copy SKSE plugin to distribution" UseInBuild="true">
-    <Command>xcopy "build\Release\@filename.dll" "Data\SKSE\Plugins\@filename.dll*" /Y</Command>
+  <PreBuildEvent Description="Build SKSE plugins and set up distribution" UseInBuild="true">
+    <Command>PreBuild.bat "@filename" "@temppath"</Command>
   </PreBuildEvent>
-  <Packages Output="Data">
-    <Package Name="@filename" RootDir="Data">
+  <PostBuildEvent Description="Clean temporary files" UseInBuild="true">
+    <Command>rmdir "@temppath" /s /q</Command>
+  </PostBuildEvent>
+  <Packages Output="@temppath">
+    <Package Name="SkyrimSE\@filename" RootDir="dist\Data">
+      <Include NoRecurse="false">Interface</Include>
+      <Include NoRecurse="true">Scripts</Include>
+    </Package>
+    <Package Name="SkyrimVR\@filename" RootDir="dist\Data">
       <Include NoRecurse="false">Interface</Include>
       <Include NoRecurse="true">Scripts</Include>
     </Package>
   </Packages>
-  <ZipFiles Output="Data">
-    <ZipFile Name="@modname" RootDir="Data" Compression="deflate">
+  <ZipFiles Output="dist">
+    <ZipFile Name="@modname SE" RootDir="@temppath\SkyrimSE" Compression="deflate">
       <Include>@filename.esp</Include>
       <Include>@filename.bsa</Include>
       <Include>SKSE\Plugins\@filename.dll</Include>
+      <Include NoRecurse="true">MCM\Config\@filename</Include>
+      <Include NoRecurse="true">Source\Scripts</Include>
+    </ZipFile>
+    <ZipFile Name="@modname VR" RootDir="@temppath\SkyrimVR" Compression="deflate">
+      <Include>@filename.esp</Include>
+      <Include>@filename.bsa</Include>
+      <Include>SKSE\Plugins\@filename.dll</Include>
+      <Include NoRecurse="true">MCM\Config\@filename</Include>
       <Include NoRecurse="true">Source\Scripts</Include>
     </ZipFile>
   </ZipFiles>

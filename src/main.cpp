@@ -1,8 +1,9 @@
-﻿#include "Papyrus.h"
+#include "Papyrus.h"
 #include "Hooks.h"
 #include "BookHandler.h"
 
-extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
+extern "C" DLLEXPORT bool SKSEAPI
+	SKSEPlugin_Query(const SKSE::QueryInterface* a_skse, SKSE::PluginInfo* a_info)
 {
 #ifndef NDEBUG
 	auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
@@ -12,7 +13,7 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 		return false;
 	}
 
-	*path /= "ReadingIsGood.log"sv;
+	*path /= fmt::format("{}.log"sv, Version::PROJECT);
 	auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
 #endif
 
@@ -26,11 +27,13 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 #endif
 
 	spdlog::set_default_logger(std::move(log));
-	spdlog::set_pattern("%g(%#): [%^%l%$] %v"s);
+	spdlog::set_pattern("%s(%#): [%^%l%$] %v"s);
+
+	logger::info("{} v{}"sv, Version::PROJECT, Version::NAME);
 
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
-	a_info->name = "ReadingIsGood";
-	a_info->version = 1;
+	a_info->name = Version::PROJECT.data();
+	a_info->version = Version::MAJOR;
 
 	if (a_skse->IsEditor()) {
 		logger::critical("Loaded in editor, marking as incompatible"sv);
@@ -38,8 +41,12 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 	}
 
 	const auto ver = a_skse->RuntimeVersion();
+#ifndef SKYRIMVR
 	if (ver < SKSE::RUNTIME_1_5_39) {
-		logger::critical(FMT_STRING("Unsupported runtime version {}"), ver.string());
+#else
+	if (ver != SKSE::RUNTIME_VR_1_4_15_1) {
+#endif
+		logger::critical(FMT_STRING("Unsupported runtime version {}"sv), ver.string());
 		return false;
 	}
 
@@ -49,20 +56,23 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
-	logger::info("ReadingIsGood loaded"sv);
+	logger::info("{} loaded"sv, Version::PROJECT);
 
 	SKSE::Init(a_skse);
 
-	Papyrus::Register();
 	Hooks::Install();
 
-	auto skse_msg = SKSE::GetMessagingInterface();
-	skse_msg->RegisterListener([](SKSE::MessagingInterface::Message* a_msg) {
-		if (a_msg->type == SKSE::MessagingInterface::kDataLoaded)
+	auto papyrus = SKSE::GetPapyrusInterface();
+	papyrus->Register(Papyrus::RegisterFuncs);
+
+	auto messaging = SKSE::GetMessagingInterface();
+	messaging->RegisterListener(
+		[](SKSE::MessagingInterface::Message* a_msg)
 		{
-			BookHandler::GetSingleton().Initialize();
-		}
-	});
+			if (a_msg->type == SKSE::MessagingInterface::kDataLoaded) {
+				BookHandler::GetSingleton()->Initialize();
+			}
+		});
 
 	return true;
 }

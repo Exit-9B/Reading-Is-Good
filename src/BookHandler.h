@@ -3,11 +3,11 @@
 class BookHandler
 {
 public:
-	static BookHandler& GetSingleton();
+	static BookHandler* GetSingleton();
 
 	void Initialize();
 
-	std::map<RE::TESObjectBOOK*, RE::ActorValue> SkillBooks;
+	std::unordered_map<RE::TESObjectBOOK*, RE::ActorValue> SkillBooks;
 
 private:
 	BookHandler() = default;

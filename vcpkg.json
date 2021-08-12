@@ -1,10 +1,11 @@
 {
   "name": "readingisgood",
-  "version-string": "1.0.4",
+  "version-string": "1.1.0",
   "description": "Don't save your skill books for later!",
   "homepage": "https://github.com/Exit-9B/Reading-Is-Good",
   "license": "MIT",
   "dependencies": [
+    "boost-stl-interfaces",
     "span-lite",
     "spdlog",
     "xbyak"

@@ -1,4 +1,4 @@
-set(headers ${headers}
+set(HEADERS ${HEADERS}
     src/PCH.h
 
     src/Offsets.h
@@ -14,4 +14,7 @@ set(headers ${headers}
     src/SkillBookUtil.h
 
     src/BookHandler.h
+
+    src/Encoding.h
+    src/Translation.h
 )

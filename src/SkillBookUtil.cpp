@@ -2,16 +2,19 @@
 #include "Registration.h"
 #include "SkillBookManager.h"
 #include "BookHandler.h"
+#include "Translation.h"
 
 #define REGISTER(vm, script_name, fn_name) \
-vm->RegisterFunction(#fn_name ## sv, script_name, fn_name, true)
+	vm->RegisterFunction(#fn_name##sv, script_name, fn_name, true)
 
 std::string SkillBookUtil::GetSkillName(RE::StaticFunctionTag*, RE::ActorValue a_actorValue)
 {
 	return SkillBookManager::GetSkillName(a_actorValue);
 }
 
-void SkillBookUtil::Notification(RE::StaticFunctionTag*,
+// Deprecated in v1.1.0
+void SkillBookUtil::Notification(
+	RE::StaticFunctionTag*,
 	RE::BGSMessage* a_format,
 	RE::ActorValue a_actorValue,
 	std::string a_soundID)
@@ -26,8 +29,19 @@ void SkillBookUtil::Notification(RE::StaticFunctionTag*,
 
 	const char* sound = a_soundID.empty() ? nullptr : a_soundID.c_str();
 
-	// Don't mind the name, this function is used everywhere in the engine
 	RE::DebugNotification(strBuf, sound, false);
+}
+
+void SkillBookUtil::TranslateNotification(
+	RE::StaticFunctionTag*,
+	std::string a_message,
+	std::string a_soundID)
+{
+	std::string translated = Translation::Translate(a_message);
+	const char* sound = a_soundID.empty() ? nullptr : a_soundID.c_str();
+
+	// Don't mind the name, this function is used everywhere in the engine
+	RE::DebugNotification(translated.c_str(), sound, false);
 }
 
 bool SkillBookUtil::AddReadSkillBooksToLists(
@@ -42,15 +56,11 @@ bool SkillBookUtil::AddReadSkillBooksToLists(
 
 	int32_t booksUpdated = 0;
 
-	for (auto [book, skill] : BookHandler::GetSingleton().SkillBooks)
-	{
-		if (book->IsRead())
-		{
+	for (auto& [book, skill] : BookHandler::GetSingleton()->SkillBooks) {
+		if (book->IsRead()) {
 			int32_t skillIndex = static_cast<int32_t>(skill) - firstSkill;
-			if (skillIndex >= 0 && skillIndex < numSkills)
-			{
-				if (!a_lists[skillIndex]->HasForm(book))
-				{
+			if (skillIndex >= 0 && skillIndex < numSkills) {
+				if (!a_lists[skillIndex]->HasForm(book)) {
 					a_lists[skillIndex]->AddForm(book);
 					booksUpdated++;
 				}
@@ -58,8 +68,7 @@ bool SkillBookUtil::AddReadSkillBooksToLists(
 		}
 	}
 
-	if (booksUpdated > 0)
-	{
+	if (booksUpdated > 0) {
 		logger::info("Found {} skill books read before installing"sv, booksUpdated);
 	}
 
@@ -71,6 +80,7 @@ bool SkillBookUtil::RegisterFuncs(VM* a_vm)
 	constexpr std::string_view scriptname = "RIG_SkillBookUtil"sv;
 	REGISTER(a_vm, scriptname, GetSkillName);
 	REGISTER(a_vm, scriptname, Notification);
+	REGISTER(a_vm, scriptname, TranslateNotification);
 	REGISTER(a_vm, scriptname, AddReadSkillBooksToLists);
 
 	return true;

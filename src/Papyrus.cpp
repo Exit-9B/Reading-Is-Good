@@ -4,19 +4,19 @@
 #include "FormExt.h"
 #include "SkillBookUtil.h"
 
-void Papyrus::Register()
+bool Papyrus::RegisterFuncs(RE::BSScript::IVirtualMachine* a_vm)
 {
-	auto papyrus = SKSE::GetPapyrusInterface();
-
-	papyrus->Register(ActiveMagicEffectExt::RegisterFuncs);
+	ActiveMagicEffectExt::RegisterFuncs(a_vm);
 	logger::info("Registered RIG_ActiveMagicEffectExt"sv);
 
-	papyrus->Register(AliasExt::RegisterFuncs);
+	AliasExt::RegisterFuncs(a_vm);
 	logger::info("Registered RIG_AliasExt"sv);
 
-	papyrus->Register(FormExt::RegisterFuncs);
+	FormExt::RegisterFuncs(a_vm);
 	logger::info("Registered RIG_FormExt"sv);
 
-	papyrus->Register(SkillBookUtil::RegisterFuncs);
+	SkillBookUtil::RegisterFuncs(a_vm);
 	logger::info("Registered RIG_SkillBookUtil"sv);
+
+	return true;
 }
