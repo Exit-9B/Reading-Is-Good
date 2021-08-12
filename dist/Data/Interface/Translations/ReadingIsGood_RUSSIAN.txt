@@ -1,7 +1,7 @@
-$RIG_InsightGained{}	{} insight gained.
-$Current Bonuses	Current Bonuses
-$Play Sound	Play Sound
-$Settings	Settings
-$Show Notification	Show Notification
-$Skill Book Settings	Skill Book Settings
-$Status	Status
+$RIG_InsightGained{}	Получено {} очков проницательности
+$Current Bonuses	Текущие бонусы
+$Play Sound	Воспроизвести звук
+$Settings	Установки
+$Show Notification	Показать уведомление
+$Skill Book Settings	Опции тома заклинаний
+$Status	Статус
