@@ -9,6 +9,7 @@ set(SOURCES ${SOURCES}
     include/Papyrus/AliasExt.h
     include/Papyrus/FormExt.h
     include/Papyrus/SkillBookUtil.h
+    include/Patches.h
     include/Registration.h
     include/SkillBookManager.h
     include/Translation.h
@@ -21,6 +22,7 @@ set(SOURCES ${SOURCES}
     src/Papyrus/AliasExt.cpp
     src/Papyrus/FormExt.cpp
     src/Papyrus/SkillBookUtil.cpp
+    src/Patches.cpp
     src/Registration.cpp
     src/SkillBookManager.cpp
     src/Translation.cpp

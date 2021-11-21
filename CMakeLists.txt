@@ -92,7 +92,6 @@ find_package(xbyak REQUIRED)
 
 # ---- Add source files ----
 
-include(cmake/headerlist.cmake)
 include(cmake/sourcelist.cmake)
 
 source_group(
