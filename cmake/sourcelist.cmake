@@ -1,20 +1,28 @@
 set(SOURCES ${SOURCES}
-    src/PCH.cpp
-
-    src/Hooks.cpp
-    src/SkillBookManager.cpp
-
-    src/Papyrus.cpp
-    src/Registration.cpp
-    src/ActiveMagicEffectExt.cpp
-    src/AliasExt.cpp
-    src/FormExt.cpp
-    src/SkillBookUtil.cpp
-
+    include/BookHandler.h
+    include/Encoding.h
+    include/Hooks.h
+    include/Offsets.h
+    include/PCH.h
+    include/Papyrus.h
+    include/Papyrus/ActiveMagicEffectExt.h
+    include/Papyrus/AliasExt.h
+    include/Papyrus/FormExt.h
+    include/Papyrus/SkillBookUtil.h
+    include/Registration.h
+    include/SkillBookManager.h
+    include/Translation.h
     src/BookHandler.cpp
-
     src/Encoding.cpp
+    src/Hooks.cpp
+    src/PCH.cpp
+    src/Papyrus.cpp
+    src/Papyrus/ActiveMagicEffectExt.cpp
+    src/Papyrus/AliasExt.cpp
+    src/Papyrus/FormExt.cpp
+    src/Papyrus/SkillBookUtil.cpp
+    src/Registration.cpp
+    src/SkillBookManager.cpp
     src/Translation.cpp
-
     src/main.cpp
 )

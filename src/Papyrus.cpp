@@ -1,8 +1,8 @@
 #include "Papyrus.h"
-#include "ActiveMagicEffectExt.h"
-#include "AliasExt.h"
-#include "FormExt.h"
-#include "SkillBookUtil.h"
+#include "Papyrus/ActiveMagicEffectExt.h"
+#include "Papyrus/AliasExt.h"
+#include "Papyrus/FormExt.h"
+#include "Papyrus/SkillBookUtil.h"
 
 bool Papyrus::RegisterFuncs(RE::BSScript::IVirtualMachine* a_vm)
 {

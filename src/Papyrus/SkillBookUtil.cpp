@@ -1,4 +1,4 @@
-#include "SkillBookUtil.h"
+#include "Papyrus/SkillBookUtil.h"
 #include "Registration.h"
 #include "SkillBookManager.h"
 #include "BookHandler.h"
