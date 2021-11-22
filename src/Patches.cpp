@@ -12,7 +12,7 @@ bool Patch::WriteSkillBookPatch(ReadSkillBookCallback* a_callback)
 		Patch(std::uintptr_t a_funcAddr)
 		{
 			movss(xmm1, dword[rsp + 0x88]);
-			mov(rcx, rdi);
+			mov(rcx, r15);
 			mov(rax, a_funcAddr);
 			call(rax);
 		}
@@ -24,7 +24,6 @@ bool Patch::WriteSkillBookPatch(ReadSkillBookCallback* a_callback)
 		logger::critical("Patch was too large, failed to install"sv);
 		return false;
 	}
-	assert(patch.getSize() <= 0x19);
 
 	REL::safe_fill(hookAddr, REL::NOP, 0x19);
 	REL::safe_write(hookAddr, patch.getCode(), patch.getSize());

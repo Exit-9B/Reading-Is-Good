@@ -17,7 +17,7 @@ void InitLogger()
 #else
 	auto path = logger::log_directory();
 	if (!path) {
-		return false;
+		return;
 	}
 
 	*path /= fmt::format("{}.log"sv, Version::PROJECT);
@@ -46,7 +46,7 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version =
 	v.pluginVersion = Version::MAJOR;
 	v.PluginName(Version::PROJECT);
 	v.AuthorName("Parapets"sv);
-	v.CompatibleVersions({ SKSE::RUNTIME_1_6_318 });
+	v.UsesAddressLibrary(true);
 	return v;
 }();
 
