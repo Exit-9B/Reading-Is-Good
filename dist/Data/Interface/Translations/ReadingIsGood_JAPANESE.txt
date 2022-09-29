@@ -1,7 +1,7 @@
-$RIG_InsightGained{}	{} insight gained.
-$Current Bonuses	Current Bonuses
-$Play Sound	Play Sound
-$Settings	Settings
-$Show Notification	Show Notification
-$Skill Book Settings	Skill Book Settings
-$Status	Status
+$RIG_InsightGained{}	{} 知識獲得しました。
+$Current Bonuses	現在のボーナス
+$Play Sound	音を出す
+$Settings	設定
+$Show Notification	通知を表示
+$Skill Book Settings	スキル書設定
+$Status	状況

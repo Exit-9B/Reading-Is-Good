@@ -1,7 +1,7 @@
-$RIG_InsightGained{}	{} insight gained.
-$Current Bonuses	Current Bonuses
-$Play Sound	Play Sound
-$Settings	Settings
-$Show Notification	Show Notification
-$Skill Book Settings	Skill Book Settings
-$Status	Status
+$RIG_InsightGained{}	{} conocimiento adquirido.
+$Current Bonuses	Bonificaciones actuales
+$Play Sound	Reproducir sonido
+$Settings	Ajustes
+$Show Notification	Mostrar Notificación
+$Skill Book Settings	Ajustes de Libro de habilidades
+$Status	Condición
