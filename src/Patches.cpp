@@ -7,6 +7,17 @@ bool Patch::WriteSkillBookPatch(ReadSkillBookCallback* a_callback)
 {
 	std::uintptr_t hookAddr = Offset::TESObjectBOOK::ProcessBook.address() + 0xB4;
 
+	auto pattern = REL::make_pattern<
+		"F3 4C 0F 2C 84 24 88 00 00 00 "
+		"41 8B D5 "
+		"48 8B 0D ?? ?? ?? ?? "
+		"E8 ?? ?? ?? ??">();
+
+	if (!pattern.match(hookAddr)) {
+		util::report_and_fail("Binary did not match expected, failed to install"sv);
+		return false;
+	}
+
 	struct Patch : Xbyak::CodeGenerator
 	{
 		Patch(std::uintptr_t a_funcAddr)
@@ -21,7 +32,7 @@ bool Patch::WriteSkillBookPatch(ReadSkillBookCallback* a_callback)
 	patch.ready();
 
 	if (patch.getSize() > 0x19) {
-		logger::critical("Patch was too large, failed to install"sv);
+		util::report_and_fail("Patch was too large, failed to install"sv);
 		return false;
 	}
 
@@ -37,6 +48,17 @@ bool Patch::WriteSkillBookPatch(ReadSkillBookCallback* a_callback)
 bool Patch::WriteSkillBookPatch(ReadSkillBookCallback* a_callback)
 {
 	std::uintptr_t hookAddr = Offset::TESObjectBOOK::ProcessBook.address() + 0xA3;
+
+	auto pattern = REL::make_pattern<
+		"F3 4C 0F 2C 44 24 78 "
+		"8B D5 "
+		"48 8B 0D ?? ?? ?? ?? "
+		"E8 ?? ?? ?? ??">();
+
+	if (!pattern.match(hookAddr)) {
+		util::report_and_fail("Binary did not match expected, failed to install"sv);
+		return false;
+	}
 
 	struct Patch : Xbyak::CodeGenerator
 	{
