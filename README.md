@@ -5,13 +5,14 @@ Don't save your skill books for later!
 ## Requirements
 * [CMake](https://cmake.org/)
 	* Add this to your `PATH`
-* [PowerShell](https://github.com/PowerShell/PowerShell/releases/latest)
 * [Vcpkg](https://github.com/microsoft/vcpkg)
 	* Add the environment variable `VCPKG_ROOT` with the value as the path to the folder containing vcpkg
-* [Visual Studio Community 2019](https://visualstudio.microsoft.com/)
-	* C++ Clang tools for Windows
+* [Visual Studio Community 2022](https://visualstudio.microsoft.com/)
 	* Desktop development with C++
-* [Xbyak](https://github.com/herumi/xbyak)
+* [SKSE64 SDK](https://skse.silverlock.org/)
+	* Add the environment variable `SKSE64Path`
+* [SkyUI SDK](https://drive.google.com/uc?export=download&id=0B4iEH8ar3jtxbFlkVzZSVHN0alk)
+	* Add the environment variable `SkyUISDKPath`
 
 ## Register Visual Studio as a Generator
 * Open `x64 Native Tools Command Prompt`
@@ -23,5 +24,6 @@ Don't save your skill books for later!
 git clone https://github.com/Exit-9B/Reading-Is-Good
 cd Reading-Is-Good
 git submodule update --init --recursive
-cmake -B build -S .
+cmake --preset vs2022-windows
+cmake --build build --config Release
 ```

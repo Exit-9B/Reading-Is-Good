@@ -2,51 +2,46 @@
 #include "Hooks.h"
 #include "BookHandler.h"
 
-void InitLogger()
+void InitializeLog()
 {
-	static bool initialized = false;
-	if (!initialized) {
-		initialized = true;
-	}
-	else {
-		return;
-	}
-
 #ifndef NDEBUG
 	auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
 #else
 	auto path = logger::log_directory();
 	if (!path) {
-		return;
+		util::report_and_fail("Failed to find standard logging directory"sv);
 	}
 
-	*path /= fmt::format("{}.log"sv, Version::PROJECT);
+	*path /= fmt::format("{}.log"sv, Plugin::NAME);
 	auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
 #endif
 
-	auto log = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
-
 #ifndef NDEBUG
-	log->set_level(spdlog::level::trace);
+	const auto level = spdlog::level::trace;
 #else
-	log->set_level(spdlog::level::info);
-	log->flush_on(spdlog::level::warn);
+	const auto level = spdlog::level::info;
 #endif
+
+	auto log = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
+	log->set_level(level);
+	log->flush_on(level);
 
 	spdlog::set_default_logger(std::move(log));
 	spdlog::set_pattern("%s(%#): [%^%l%$] %v"s);
-
-	logger::info("{} v{}"sv, Version::PROJECT, Version::NAME);
 }
 
 #ifndef SKYRIMVR
+
 extern "C" DLLEXPORT constinit auto SKSEPlugin_Version =
 []() {
 	SKSE::PluginVersionData v{};
-	v.pluginVersion = Version::MAJOR;
-	v.PluginName(Version::PROJECT);
+
+	v.PluginVersion(Plugin::VERSION);
+	v.PluginName(Plugin::NAME);
 	v.AuthorName("Parapets"sv);
+
 	v.UsesAddressLibrary(true);
+
 	return v;
 }();
 
@@ -57,8 +52,8 @@ extern "C" DLLEXPORT bool SKSEAPI
 {
 
 	a_info->infoVersion = SKSE::PluginInfo::kVersion;
-	a_info->name = Version::PROJECT.data();
-	a_info->version = Version::MAJOR;
+	a_info->name = Plugin::NAME.data();
+	a_info->version = Plugin::VERSION[0];
 
 	if (a_skse->IsEditor()) {
 		logger::critical("Loaded in editor, marking as incompatible"sv);
@@ -73,11 +68,13 @@ extern "C" DLLEXPORT bool SKSEAPI
 
 	return true;
 }
+
 #endif
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
-	logger::info("{} loaded"sv, Version::PROJECT);
+	InitializeLog();
+	logger::info("{} v{}"sv, Plugin::NAME, Plugin::VERSION.string());
 
 	SKSE::Init(a_skse);
 
